@@ -1,4 +1,5 @@
 node_modules/
 dist/
-repo/*
+repo/
 release.zip
+.env
