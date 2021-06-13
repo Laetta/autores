@@ -6,6 +6,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "adm-zip": "^0.5.5",
+    "dotenv": "^10.0.0",
     "file-saver": "^2.0.5",
     "gh-release": "^6.0.0",
     "github-api": "^3.4.0",
