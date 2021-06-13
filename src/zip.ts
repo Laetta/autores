@@ -3,7 +3,6 @@ import { readFile } from "fs";
 import glob from "glob";
 import JSZip from "jszip";
 import * as path from "path";
-import { pullRepo } from "./repository";
 
 const dest = path.join(process.cwd(), "./release.zip");
 

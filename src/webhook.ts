@@ -23,5 +23,6 @@ handler.on("push", async function (event) {
     event.payload.repository.name,
     event.payload.ref
   );
+
   handleRespackChange();
 });
