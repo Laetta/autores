@@ -7,15 +7,6 @@ import { pullRepo } from "./repository";
 
 const dest = path.join(process.cwd(), "./release.zip");
 
-export async function releaseRespack() {
-  console.time("pulling");
-  await pullRepo();
-  console.timeEnd("pulling");
-  console.time("zipping");
-  await zipRespack();
-  console.timeEnd("zipping");
-}
-
 async function addToZip(filePath: string, zip: JSZip) {
   return new Promise<void>((resolve) => {
     fs.stat(filePath, async function (err, fileStat) {
@@ -38,7 +29,7 @@ async function addToZip(filePath: string, zip: JSZip) {
   });
 }
 
-async function zipRespack() {
+export async function zipRespack() {
   getDirectories(async (err, filePaths) => {
     if (err) console.log(err);
     const zip = new JSZip();

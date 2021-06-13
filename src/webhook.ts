@@ -1,6 +1,6 @@
 import createHandler from "github-webhook-handler";
 import http from "http";
-import { releaseRespack } from "./release-respack";
+import { handleRespackChange } from "./main";
 
 const handler = createHandler({ path: "/", secret: "myhashsecret44" });
 
@@ -23,5 +23,5 @@ handler.on("push", async function (event) {
     event.payload.repository.name,
     event.payload.ref
   );
-  releaseRespack();
+  handleRespackChange();
 });
