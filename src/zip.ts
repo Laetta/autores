@@ -4,7 +4,7 @@ import glob from "glob";
 import JSZip from "jszip";
 import * as path from "path";
 
-const dest = path.join(process.cwd(), "./release.zip");
+export const respackZipPath = path.join(process.cwd(), "./release.zip");
 
 async function addToZip(filePath: string, zip: JSZip) {
   return new Promise<void>((resolve) => {
@@ -39,7 +39,7 @@ export async function zipRespack() {
     console.log(filePaths.length + " files added to zip");
 
     const content = await zip.generateAsync({ type: "nodebuffer" });
-    fs.writeFileSync(dest, content);
+    fs.writeFileSync(respackZipPath, content);
     const sizeMb = content.byteLength / 1000 / 1000;
     console.log(`Zip (${sizeMb.toFixed(2)}Mb) saved!`);
   });

@@ -1,26 +1,41 @@
-var ghRelease = require("gh-release");
+import { secrets } from "./config";
+import { respackZipPath } from "./zip";
 
-// all options have defaults and can be omitted
-var options = {
-  tag_name: "latest",
-  target_commitish: "master",
-  name: "release",
-  body: "* init\n",
-  draft: false,
-  prerelease: false,
-  repo: "respack",
-  owner: "Laetta",
-  endpoint: "https://api.github.com", // for GitHub enterprise, use http(s)://hostname/api/v3
-  auth: {
-    token: "TOKEN HERE",
-  },
-};
+const GitHub = require("github-api");
+const ghReleaseAssets = require("gh-release-assets");
 
-export function releaseRespack() {
-  console.log("Starting to release");
-  ghRelease(options, function (err: any, result: any) {
-    console.log("Releasing...");
-    if (err) throw err;
-    console.log(result); // create release response: https://developer.github.com/v3/repos/releases/#response-4
-  });
+const gh = new GitHub({
+  username: "Laetta",
+  token: secrets.GithubToken,
+});
+
+const repo = gh.getRepo("Laetta", "respack");
+
+export async function releaseRespack() {
+  console.log("[GITHUB] Updating the release...");
+  const latest = await getLatestRelease();
+  if (latest) {
+    updateLatestRelease(latest);
+  }
+}
+
+function updateLatestRelease(latest: any) {
+  ghReleaseAssets(
+    {
+      url: latest.upload_url,
+      token: [secrets.GithubToken],
+      assets: [respackZipPath],
+    },
+    function (err: any, assets: any) {
+      console.log("[GITHUB] Release updated!", assets);
+    }
+  );
+}
+
+async function getLatestRelease() {
+  const response = await repo.listReleases(() => {});
+  const releases = response.data;
+  for (const release of releases) {
+    if (release.tag_name == "latest") return release;
+  }
 }
