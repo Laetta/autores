@@ -10,3 +10,4 @@ export function getSha1() {
 export async function updateSha1() {
   sha1 = await sha1File(respackZipPath);
 }
+updateSha1();

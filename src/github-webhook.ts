@@ -18,10 +18,13 @@ handler.on("error", function (err) {
 });
 
 handler.on("push", async function (event) {
+  const commits = event.payload.commits;
+
   console.log(
     "Received a push event for %s to %s",
     event.payload.repository.name,
-    event.payload.ref
+    event.payload.ref,
+    { commits }
   );
 
   handleRespackChange();
