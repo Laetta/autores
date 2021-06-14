@@ -29,7 +29,8 @@
     "typescript": "^4.3.2"
   },
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "screen -dmS vk4-respack npx ts-node index.ts",
+    "dev": "ts-node index.ts",
     "build": "tsc"
   },
   "author": "Laetta",

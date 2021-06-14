@@ -1,6 +1,5 @@
 import { MessageBuilder, Webhook } from "webhook-discord";
 import { secrets } from "./config";
-import { getSha1 } from "./hash";
 
 const Hook = new Webhook(secrets.DiscordToken);
 
@@ -13,8 +12,7 @@ export async function notifyDiscord(commitMessages: string[]) {
       .setName("Respack")
       .setTitle("Resurssipaketti päivitetty!")
       .setDescription(description)
-      .setColor("#FFAA00")
-      .setText("" + getSha1());
+      .setColor("#FFAA00");
     await Hook.send(msg);
   } catch (error) {
     console.log("EIII");
