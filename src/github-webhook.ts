@@ -18,7 +18,8 @@ handler.on("error", function (err) {
 });
 
 handler.on("push", async function (event) {
-  const commits = event.payload.commits;
+  const commits = event.payload.commits as any[];
+  const commitMessages = commits.map((commit) => commit.message as string);
 
   console.log(
     "Received a push event for %s to %s",
@@ -27,5 +28,24 @@ handler.on("push", async function (event) {
     { commits }
   );
 
-  handleRespackChange();
+  handleRespackChange(commitMessages);
 });
+
+/** EXAMPLE COMMIT LIST
+  commits: [
+    {
+      id: 'e3d3ba14135exxxxxxxx',
+      tree_id: 'ce0b9ee81c76d233e414663xxxxxxxxxxxxxxxxx',
+      distinct: true,
+      message: 'automation test',
+      timestamp: '2021-06-14T21:36:23+03:00',
+      url: 'https://github.com/Laetta/respack/commit/e3d3ba14135exxxxxxxx',
+      author: [Object],
+      committer: [Object],
+      added: [],
+      removed: [],
+      modified: [Array]
+    }
+  ]
+
+ */
