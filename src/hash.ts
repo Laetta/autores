@@ -20,5 +20,6 @@ export async function updateHash() {
 }
 
 export async function downloadRelease() {
+  console.log("Downloading the release zip from GitHub");
   await download(RELEASE_URL, "downloaded");
 }
