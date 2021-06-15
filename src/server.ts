@@ -1,11 +1,11 @@
 import http from "http";
-import { getSha1 } from "./hash";
+import { getHash } from "./hash";
 
-const server = http
+http
   .createServer(async (req, res) => {
     if (req.url === "/respack" && req.method === "GET") {
       res.writeHead(200, { "Content-Type": "application/json" });
-      const hash = getSha1();
+      const hash = getHash();
       console.log("[GET] /respack ->" + hash);
       res.end(JSON.stringify({ hash: hash }));
     } else {

@@ -1,13 +1,12 @@
-import sha1File from "sha1-file";
 import { respackZipPath } from "./zip";
+import hasha from "hasha";
 
-let sha1: string | undefined;
+let hash: string | undefined;
 
-export function getSha1() {
-  return sha1;
+export function getHash() {
+  return hash;
 }
 
-export async function updateSha1() {
-  sha1 = await sha1File(respackZipPath);
+export async function updateHash() {
+  hash = await hasha.fromFile(respackZipPath, { algorithm: "sha1" });
 }
-updateSha1();
