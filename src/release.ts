@@ -15,21 +15,24 @@ export async function releaseRespack() {
   console.log("[GITHUB] Updating the release...");
   const latest = await getLatestRelease();
   if (latest) {
-    updateLatestRelease(latest);
+    await updateLatestRelease(latest);
   }
 }
 
 function updateLatestRelease(latest: any) {
-  ghReleaseAssets(
-    {
-      url: latest.upload_url,
-      token: [secrets.GithubToken],
-      assets: [respackZipPath],
-    },
-    function (err: any, assets: any) {
-      console.log("[GITHUB] Release updated!", assets);
-    }
-  );
+  return new Promise<void>((resolve) => {
+    ghReleaseAssets(
+      {
+        url: latest.upload_url,
+        token: [secrets.GithubToken],
+        assets: [respackZipPath],
+      },
+      function (err: any, assets: any) {
+        console.log("[GITHUB] Release updated!", assets);
+        resolve();
+      }
+    );
+  });
 }
 
 async function getLatestRelease() {
