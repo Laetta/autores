@@ -29,19 +29,22 @@ async function addToZip(filePath: string, zip: JSZip) {
 }
 
 export async function zipRespack() {
-  getDirectories(async (err, filePaths) => {
-    if (err) console.log(err);
-    const zip = new JSZip();
-    const jobs = filePaths.map((filePath) => {
-      return addToZip(filePath, zip);
-    });
-    await Promise.all(jobs);
-    console.log(filePaths.length + " files added to zip");
+  return new Promise<void>((resolve) => {
+    getDirectories(async (err, filePaths) => {
+      if (err) console.log(err);
+      const zip = new JSZip();
+      const jobs = filePaths.map((filePath) => {
+        return addToZip(filePath, zip);
+      });
+      await Promise.all(jobs);
+      console.log(filePaths.length + " files added to zip");
 
-    const content = await zip.generateAsync({ type: "nodebuffer" });
-    fs.writeFileSync(respackZipPath, content);
-    const sizeMb = content.byteLength / 1000 / 1000;
-    console.log(`Zip (${sizeMb.toFixed(2)}Mb) saved!`);
+      const content = await zip.generateAsync({ type: "nodebuffer" });
+      fs.writeFileSync(respackZipPath, content);
+      const sizeMb = content.byteLength / 1000 / 1000;
+      console.log(`Zip (${sizeMb.toFixed(2)}Mb) saved!`);
+      resolve();
+    });
   });
 }
 
