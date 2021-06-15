@@ -1,11 +1,9 @@
 import { notifyDiscord } from "./discord";
 import { releaseRespack } from "./release";
-import { pullRepo } from "./repository";
+import { pullRepo, initLocalRepo } from "./repository";
 import { zipRespack } from "./zip";
 import { updateHash } from "./hash";
 
-// releaseRespack();
-// updateSha1().then(notifyDiscord);
 export async function handleRespackChange(commitMessages: string[]) {
   await pullRepo();
   await zipRespack();
@@ -14,4 +12,8 @@ export async function handleRespackChange(commitMessages: string[]) {
   await notifyDiscord(commitMessages);
 }
 
-zipRespack().then(updateHash);
+async function start() {
+  await initLocalRepo();
+  await updateHash();
+}
+start();

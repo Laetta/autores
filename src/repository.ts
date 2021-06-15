@@ -9,7 +9,7 @@ const options: Partial<SimpleGitOptions> = {
 
 const git: SimpleGit = simpleGit(options);
 
-async function init() {
+export async function initLocalRepo() {
   await git.init();
   try {
     console.log("[GIT] Cloning the repository");
@@ -35,5 +35,3 @@ export async function pullRepo() {
 //   gh.createRelease({})
 //   console.log("[GITHUB] Released!");
 // }
-
-init();

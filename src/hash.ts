@@ -8,5 +8,8 @@ export function getHash() {
 }
 
 export async function updateHash() {
+  console.log("Hashing!");
+  console.log({ respackZipPath });
   hash = await hasha.fromFile(respackZipPath, { algorithm: "sha1" });
+  console.log({ hash });
 }
