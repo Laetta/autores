@@ -28,6 +28,7 @@ function updateLatestRelease(latest: any) {
         assets: [respackZipPath],
       },
       function (err: any, assets: any) {
+        console.log("[GITHUB] Error: ", err);
         console.log("[GITHUB] Release updated!", assets);
         resolve();
       }
