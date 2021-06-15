@@ -8,6 +8,7 @@ export async function handleRespackChange(commitMessages: string[]) {
   await pullRepo();
   await zipRespack();
   await releaseRespack();
+  await downloadRelease();
   await updateHash();
   await notifyDiscord(commitMessages);
 }
