@@ -2,7 +2,7 @@ import { notifyDiscord } from "./discord";
 import { releaseRespack } from "./release";
 import { pullRepo, initLocalRepo } from "./repository";
 import { zipRespack } from "./zip";
-import { updateHash } from "./hash";
+import { updateHash, downloadRelease } from "./hash";
 
 export async function handleRespackChange(commitMessages: string[]) {
   await pullRepo();
@@ -13,6 +13,7 @@ export async function handleRespackChange(commitMessages: string[]) {
 }
 
 async function start() {
+  await downloadRelease();
   await initLocalRepo();
   await updateHash();
 }

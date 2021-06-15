@@ -5,8 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
+    "@types/download": "^8.0.0",
     "adm-zip": "^0.5.5",
     "dotenv": "^10.0.0",
+    "download": "^8.0.0",
     "file-saver": "^2.0.5",
     "gh-release": "^6.0.0",
     "gh-release-assets": "^2.0.0",

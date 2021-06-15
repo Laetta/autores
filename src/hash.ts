@@ -1,7 +1,12 @@
-import { respackZipPath } from "./zip";
+import download from "download";
 import hasha from "hasha";
+import path from "path";
 
 let hash: string | undefined;
+export const releasePath = path.join(process.cwd(), "./downloaded/release.zip");
+
+const RELEASE_URL =
+  "https://github.com/Laetta/respack/releases/download/latest/release.zip";
 
 export function getHash() {
   return hash;
@@ -9,7 +14,11 @@ export function getHash() {
 
 export async function updateHash() {
   console.log("Hashing!");
-  console.log({ respackZipPath });
-  hash = await hasha.fromFile(respackZipPath, { algorithm: "sha1" });
+  console.log({ releasePath });
+  hash = await hasha.fromFile(releasePath, { algorithm: "sha1" });
   console.log({ hash });
+}
+
+export async function downloadRelease() {
+  await download(RELEASE_URL, "downloaded");
 }
