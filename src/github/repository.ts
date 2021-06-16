@@ -7,7 +7,7 @@ const options: Partial<SimpleGitOptions> = {
   maxConcurrentProcesses: 6,
 };
 
-const git: SimpleGit = simpleGit(options);
+const git: SimpleGit = simpleGit("./repo", options);
 
 export async function initLocalRepo() {
   await git.init();
@@ -21,10 +21,7 @@ export async function initLocalRepo() {
 
 export async function pullRepo() {
   console.log("[GIT] Pulling the repository");
-  const pullResult = await git.pull(
-    "git@github.com:Laetta/respack.git",
-    "./repo"
-  );
+  const pullResult = await git.pull("respack", "master");
   console.log(
     "[GIT] Repository pulled! Files changed: " + pullResult.files.length
   );

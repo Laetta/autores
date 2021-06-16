@@ -3,3 +3,4 @@ dist/
 repo/
 release.zip
 *.env
+downloaded/*
