@@ -21,8 +21,13 @@ export async function initLocalRepo() {
 
 export async function pullRepo() {
   console.log("[GIT] Pulling the repository");
-  await git.pull();
-  console.log("[GIT] Repository pulled!");
+  const pullResult = await git.pull(
+    "git@github.com:Laetta/respack.git",
+    "./repo"
+  );
+  console.log(
+    "[GIT] Repository pulled! Files changed: " + pullResult.files.length
+  );
 }
 
 // var gh = new GitHub({

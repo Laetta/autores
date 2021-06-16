@@ -6,12 +6,12 @@ http
   .createServer(async (req, res) => {
     if (req.method !== "GET") return sendInvalidRoute(res);
 
-    if (req.url === "/respack/hash") {
-      return sendHash(res);
-    }
-
     if (req.url === "/respack/download") {
       return sendRespack(res);
+    }
+
+    if (req.url === "/respack/hash") {
+      return sendHash(res);
     }
 
     return sendInvalidRoute(res);
