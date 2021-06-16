@@ -7,6 +7,7 @@ const options: Partial<SimpleGitOptions> = {
   maxConcurrentProcesses: 6,
 };
 
+// export const respackZipPath = path.join(process.cwd(), "./release.zip");
 const git: SimpleGit = simpleGit("./repo", options);
 
 export async function initLocalRepo() {
@@ -21,7 +22,7 @@ export async function initLocalRepo() {
 
 export async function pullRepo() {
   console.log("[GIT] Pulling the repository");
-  const pullResult = await git.pull("respack", "master");
+  const pullResult = await git.pull("origin", "master", { "--rebase": "true" });
   console.log(
     "[GIT] Repository pulled! Files changed: " + pullResult.files.length
   );
