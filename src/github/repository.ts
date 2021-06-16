@@ -23,10 +23,8 @@ export async function initLocalRepo() {
 
 export async function pullRepo() {
   console.log("[GIT] Pulling the repository");
-  const pullResult = await git.pull();
-  console.log(
-    "[GIT] Repository pulled! Files changed: " + pullResult.files.length
-  );
+  const pullResult = await git.pull("origin", "master");
+  console.log("[GIT] Repository pulled! Files changed: " + pullResult.files);
 }
 
 // var gh = new GitHub({
