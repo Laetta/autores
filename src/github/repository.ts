@@ -22,7 +22,7 @@ export async function initLocalRepo() {
 
 export async function pullRepo() {
   console.log("[GIT] Pulling the repository");
-  const pullResult = await git.pull("origin", "master", { "--rebase": "true" });
+  const pullResult = await git.pull("origin", "master", { "--hard": null });
   console.log(
     "[GIT] Repository pulled! Files changed: " + pullResult.files.length
   );
