@@ -1,4 +1,5 @@
 import simpleGit, { SimpleGit, SimpleGitOptions } from "simple-git";
+import { wait } from "../helpers";
 // const GitHub = require("github-api");
 
 const options: Partial<SimpleGitOptions> = {
@@ -11,6 +12,7 @@ const options: Partial<SimpleGitOptions> = {
 const git: SimpleGit = simpleGit("./repo", options);
 
 export async function initLocalRepo() {
+  await wait(300);
   await git.init().catch(() => {});
   await git.addRemote("respack", "git@github.com:Laetta/respack.git");
   try {
@@ -23,7 +25,7 @@ export async function initLocalRepo() {
 
 export async function pullRepo() {
   console.log("[GIT] Pulling the repository");
-  const pullResult = await git.pull("origin", "master");
+  const pullResult = await git.pull();
   console.log("[GIT] Repository pulled! Files changed: " + pullResult.files);
 }
 
