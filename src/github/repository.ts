@@ -12,6 +12,7 @@ const git: SimpleGit = simpleGit("./repo", options);
 
 export async function initLocalRepo() {
   await git.init();
+  await git.addRemote("respack", "git@github.com:Laetta/respack.git");
   try {
     console.log("[GIT] Cloning the repository");
     await git.clone("git@github.com:Laetta/respack.git", "./repo");
@@ -22,10 +23,7 @@ export async function initLocalRepo() {
 
 export async function pullRepo() {
   console.log("[GIT] Pulling the repository");
-  const pullResult = await git.pull(
-    "git@github.com:Laetta/respack.git",
-    "master"
-  );
+  const pullResult = await git.pull();
   console.log(
     "[GIT] Repository pulled! Files changed: " + pullResult.files.length
   );
