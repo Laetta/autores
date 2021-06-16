@@ -1,5 +1,5 @@
-import { secrets } from "./config";
-import { respackZipPath } from "./zip";
+import { secrets } from "../config";
+import { respackZipPath } from "../zip";
 import Oktokit, { Octokit } from "@octokit/rest";
 import * as fs from "fs";
 

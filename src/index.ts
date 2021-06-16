@@ -1,4 +1,4 @@
 require("dotenv").config();
-require("./github-webhook");
-require("./repository");
+require("./github/github-webhook");
+require("./github/repository");
 require("./server");
