@@ -1,6 +1,6 @@
 import createHandler from "github-webhook-handler";
 import http from "http";
-import { handleRespackChange } from "./main";
+import { handleRespackChange } from "../main";
 
 const handler = createHandler({ path: "/", secret: "myhashsecret44" });
 

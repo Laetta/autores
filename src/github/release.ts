@@ -62,7 +62,6 @@ async function updateLatestRelease(latest: any) {
   // console.log(data);
 }
 
-releaseRespack();
 async function getLatestRelease() {
   const response = await repo.listReleases(() => {});
   const releases = response.data;

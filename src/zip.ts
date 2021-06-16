@@ -6,6 +6,14 @@ import * as path from "path";
 
 export const respackZipPath = path.join(process.cwd(), "./release.zip");
 
+let respackFileBuffer = fs.readFileSync(respackZipPath);
+function updateServedRespackZip() {
+  respackFileBuffer = fs.readFileSync(respackZipPath);
+}
+export function getRespackFileBuffer() {
+  return respackFileBuffer;
+}
+
 async function addToZip(filePath: string, zip: JSZip) {
   return new Promise<void>((resolve) => {
     fs.stat(filePath, async function (err, fileStat) {
@@ -46,6 +54,7 @@ export async function zipRespack() {
       resolve();
     });
   });
+  updateServedRespackZip();
 }
 
 type GlobCallBack = Parameters<typeof glob>[2];

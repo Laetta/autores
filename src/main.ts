@@ -1,20 +1,18 @@
 import { notifyDiscord } from "./discord";
-import { releaseRespack } from "./release";
-import { pullRepo, initLocalRepo } from "./repository";
+import { releaseRespack } from "./github/release";
+import { pullRepo, initLocalRepo } from "./github/repository";
 import { zipRespack } from "./zip";
-import { updateHash, downloadRelease } from "./hash";
+import { updateHash } from "./hash";
 
 export async function handleRespackChange(commitMessages: string[]) {
   await pullRepo();
   await zipRespack();
   await releaseRespack();
-  await downloadRelease();
   await updateHash();
   await notifyDiscord(commitMessages);
 }
 
 async function start() {
-  await downloadRelease();
   await initLocalRepo();
   await updateHash();
 }
