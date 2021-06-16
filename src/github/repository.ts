@@ -24,10 +24,7 @@ export async function pullRepo() {
   console.log("[GIT] Pulling the repository");
   const pullResult = await git.pull(
     "git@github.com:Laetta/respack.git",
-    "master",
-    {
-      "--force": null,
-    }
+    "master"
   );
   console.log(
     "[GIT] Repository pulled! Files changed: " + pullResult.files.length
