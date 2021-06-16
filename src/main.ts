@@ -10,7 +10,7 @@ export async function handleRespackChange(commitMessages: string[]) {
   updateServedRespackZip();
   // await releaseRespack();
   await updateHash();
-  // await notifyDiscord(commitMessages);
+  await notifyDiscord(commitMessages);
 }
 
 async function start() {
