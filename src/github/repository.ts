@@ -13,9 +13,9 @@ const git: SimpleGit = simpleGit("./repo", options);
 
 export async function initLocalRepo() {
   await wait(300);
-  await git.init().catch(() => {});
-  await git.addRemote("respack", "git@github.com:Laetta/respack.git");
   try {
+    await git.init().catch(() => {});
+    await git.addRemote("respack", "git@github.com:Laetta/respack.git");
     console.log("[GIT] Cloning the repository");
     await git.clone("git@github.com:Laetta/respack.git", "./repo");
   } catch {
