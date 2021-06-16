@@ -11,7 +11,7 @@ const options: Partial<SimpleGitOptions> = {
 const git: SimpleGit = simpleGit("./repo", options);
 
 export async function initLocalRepo() {
-  await git.init();
+  await git.init().catch(() => {});
   await git.addRemote("respack", "git@github.com:Laetta/respack.git");
   try {
     console.log("[GIT] Cloning the repository");
