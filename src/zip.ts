@@ -7,7 +7,7 @@ import * as path from "path";
 export const respackZipPath = path.join(process.cwd(), "./release.zip");
 
 let respackFileBuffer = fs.readFileSync(respackZipPath);
-function updateServedRespackZip() {
+export function updateServedRespackZip() {
   respackFileBuffer = fs.readFileSync(respackZipPath);
 }
 export function getRespackFileBuffer() {
@@ -51,10 +51,10 @@ export async function zipRespack() {
       fs.writeFileSync(respackZipPath, content);
       const sizeMb = content.byteLength / 1000 / 1000;
       console.log(`Zip (${sizeMb.toFixed(2)}Mb) saved!`);
+      updateServedRespackZip();
       resolve();
     });
   });
-  updateServedRespackZip();
 }
 
 type GlobCallBack = Parameters<typeof glob>[2];
